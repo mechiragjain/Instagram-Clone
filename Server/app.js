@@ -21,6 +21,7 @@ require('./models/post');
 app.use(express.json());
 app.use(require('./routes/login'));
 app.use(require('./routes/post'));
+app.use(require('./routes/user'));
 
 //GA41zuHRi6iX97kI
 
