@@ -6,7 +6,7 @@ function Home(){
   const [data,setData] = useState([])
   const {state,dispatch}=useContext(UserContext)
   useEffect(()=>{
-    fetch('/allpost',{
+    fetch('/feed',{
       headers:{
         "Authorization":"Bearer "+localStorage.getItem("jwt")
       }
@@ -114,7 +114,7 @@ function Home(){
         {data.map((item)=>{
             return(
               <div className="card home-card" key={item._id}>
-              <h5><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id : "/profile" }>{item.postedBy.name}</Link> {item.postedBy._id == state._id && <i class="material-icons" style={{float:"right", margin:"3px 5px"}} onClick={()=>deletePost(item._id)}>delete</i>}</h5>
+              <h5 style={{padding:"6px"}}><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id : "/profile" }>{item.postedBy.name}</Link> {item.postedBy._id == state._id && <i class="material-icons" style={{float:"right", margin:"3px 5px"}} onClick={()=>deletePost(item._id)}>delete</i>}</h5>
               <div className="card-image">
                 <img src={item.photo} alt="" />
               </div>

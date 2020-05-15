@@ -14,6 +14,7 @@ function NavBar(){
       return [
         <li><Link to="/createpost">Create Post</Link></li>,
         <li><Link to="/profile">Profile</Link></li>,
+        <li><Link to="/feed">Feed</Link></li>,
         <li>
         <button className="btn-small #64b5f6 blue lighten-2" type="submit" name="action"
           onClick={()=>{

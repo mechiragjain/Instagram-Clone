@@ -81,3 +81,7 @@ a{
 .text-area{
   height:200px;
 }
+
+.material-icons{
+  cursor: pointer;
+}

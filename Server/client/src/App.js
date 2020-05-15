@@ -8,7 +8,8 @@ import Login from './components/screens/Login';
 import Signup from './components/screens/Signup';
 import Profile from './components/screens/Profile';
 import CreatePost from './components/screens/CreatePost';
-import UserProfile from './components/screens/UserProfile'
+import UserProfile from './components/screens/UserProfile';
+import Feed from './components/screens/feed';
 
 import {reducer,initialState} from './reducers/userReducer';
 
@@ -44,6 +45,9 @@ const Routing = ()=>{
     </Route>
     <Route path='/profile/:userid'>
       <UserProfile />
+    </Route>
+    <Route path='/feed'>
+      <Feed />
     </Route>
     </Switch>
   )

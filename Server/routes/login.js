@@ -11,7 +11,7 @@ const requiredLogin = require('../middleware/requireLogin');
 //Signup Route
 
 router.post('/signup',(req,res)=>{
-  const {name,email,password} =req.body;
+  const {name,email,password,profilePic} =req.body;
   if(!email || !password || !name){
     return res.status(422).json({error:"Please add required fields"});
   }
@@ -27,6 +27,7 @@ router.post('/signup',(req,res)=>{
           name:name,
           email:email,
           password:hashedpassword,
+          profilePic:profilePic
         })
         user.save()
         .then((user)=>{
@@ -59,10 +60,9 @@ router.post('/login',(req,res)=>{
     bcrypt.compare(password,savedUser.password)
     .then(doMatch=>{
       if(doMatch){
-        //res.json({message:"Login Successfully"})
         const token = jwt.sign({_id:savedUser._id},TOKEN);
-        const {_id,name,email} = savedUser;
-        res.json({token:token, user:{_id,name,email}});
+        const {_id,name,email,followers,following,profilePic} = savedUser;
+        res.json({token:token, user:{_id,name,email,followers,following,profilePic}});
       } else{
         return res.status(422).json({error:"Invalid email or password"});
       }
