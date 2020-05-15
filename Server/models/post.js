@@ -4,7 +4,7 @@ const {ObjectId} = mongoose.Schema.Types;
 const postSchema = new mongoose.Schema({
   title:{
     type: String,
-    required:true
+    required:false
   },
   body:{
     type: String,
@@ -20,6 +20,6 @@ const postSchema = new mongoose.Schema({
     type:ObjectId,
     ref:"User"
   }
-});
+},{timesstamps:true});
 
 mongoose.model("Post",postSchema);

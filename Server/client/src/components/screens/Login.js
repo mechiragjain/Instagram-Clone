@@ -57,7 +57,7 @@ function Login(){
     </div>
     <div className="mycard">
       <div className="card auth-card input-field">
-        <h6> Don't have an account? <Link to="/signup">Sign up</Link></h6>
+        <h6> Don't have an account? <Link to="/signup"><b>Sign up</b></Link></h6>
       </div>
     </div>
     </div>

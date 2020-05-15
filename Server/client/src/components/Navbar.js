@@ -1,6 +1,9 @@
 import React,{useContext} from 'react';
 import {Link,useHistory} from 'react-router-dom';
 import logo from '../images/logo.png';
+import profileIcon from '../images/profile.png';
+import discover from '../images/discover.png';
+import addPost from '../images/addpost.png';
 import {UserContext} from '../App';
 
 function NavBar(){
@@ -12,9 +15,9 @@ function NavBar(){
   const renderList = ()=>{
     if(state){
       return [
-        <li><Link to="/createpost">Create Post</Link></li>,
-        <li><Link to="/profile">Profile</Link></li>,
-        <li><Link to="/feed">Feed</Link></li>,
+        <li><Link to="/createpost"><img className="imgLogo" style={{marginTop:"17px", marginRight:"22px",width:"30px",height:"30px"}}  src={addPost} alt="profile" /></Link></li>,
+        <li><Link to="/feed"><img className="imgLogo" style={{marginTop:"15px"}}  src={discover} alt="profile" /></Link></li>,
+        <li><Link to="/profile"><img className="imgLogo" style={{marginTop:"15px"}}  src={profileIcon} alt="profile" /></Link></li>,
         <li>
         <button className="btn-small #64b5f6 blue lighten-2" type="submit" name="action"
           onClick={()=>{
@@ -28,13 +31,13 @@ function NavBar(){
       ]
     } else{
       return [
-        <li><Link to="/login">Login</Link></li>,
-        <li><Link to="/signup">Signup</Link></li>
+
       ]
     }
   }
 
   return(
+    <div className="navbar-fixed">
     <nav>
     <div className="nav-wrapper white">
       <Link to={state?"/":"/signin"} class="brand-logo left"><img className="imgLogo" src={logo} alt="logo" /></Link>
@@ -43,6 +46,7 @@ function NavBar(){
       </ul>
     </div>
   </nav>
+  </div>
   )
 }
 

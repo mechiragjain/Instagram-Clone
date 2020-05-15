@@ -29,7 +29,7 @@ function Profile(){
       })
       .then(res=>res.json())
       .then(data=>{
-        
+
         fetch('/updatepic',{
           method:"put",
           headers:{
@@ -59,7 +59,7 @@ function Profile(){
 
   return(
     <div style={{maxWidth:"900px", margin:"0px auto"}}>
-      <div style={{display:"flex", justifyContent:"space-around", margin:"18px 0px", borderBottom:"1px solid grey"}}>
+      <div style={{display:"flex", justifyContent:"space-around", margin:"18px 0px", borderBottom:"1px solid rgba(var(--b38,219,219,219))"}}>
         <div>
           <img style={{width:"160px",height:"160px",borderRadius:"180px"}}
           src={state?state.profilePic:"https://res.cloudinary.com/chiragjain/image/upload/v1589529418/543600_64d1_4_vqgyf4.jpg"}
@@ -75,12 +75,12 @@ function Profile(){
           </div>
           </div>
         </div>
-        <div>
-          <h4 className="bold">{state?state.name:"Loading"}</h4>
+        <div style={{marginLeft:"-250px",marginTop:"30px"}}>
+          <h5 className="bold">{state?state.name:"Loading"}</h5>
           <div style={{display:"flex", justifyContent:"space-between", width:"108%"}}>
-              <h6>{mypics.length} Posts</h6>
-              <h6>{state?state.followers.length:"0"} Followers</h6>
-              <h6>{state?state.following.length:"0"} Following</h6>
+              <h6><b>{mypics.length}</b> Posts</h6>
+              <h6><b>{state?state.followers.length:"0"}</b> Followers</h6>
+              <h6><b>{state?state.following.length:"0"}</b> Following</h6>
           </div>
         </div>
       </div>
@@ -94,6 +94,10 @@ function Profile(){
           )
         })
       }
+      </div>
+
+      <div style={{margin:"50px", color:"grey", textAlign:"center"}}>
+        <p> © 2020 INSTAGRAM FROM FACEBOOK </p>
       </div>
 
     </div>

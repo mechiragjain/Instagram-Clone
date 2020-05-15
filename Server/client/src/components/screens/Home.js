@@ -6,7 +6,7 @@ function Home(){
   const [data,setData] = useState([])
   const {state,dispatch}=useContext(UserContext)
   useEffect(()=>{
-    fetch('/allpost',{
+    fetch('/feed',{
       headers:{
         "Authorization":"Bearer "+localStorage.getItem("jwt")
       }
@@ -54,7 +54,7 @@ function Home(){
       }).then(res=>res.json())
       .then(result=>{
         const newData = data.map(item=>{
-          if(item._id==result._id){
+          if(item._id===result._id){
             return result
           } else{
             return item
@@ -78,9 +78,8 @@ function Home(){
               })
           }).then(res=>res.json())
           .then(result=>{
-              console.log(result)
               const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -101,7 +100,6 @@ function Home(){
         }
       }).then(res=>res.json())
       .then(result=>{
-        console.log(result);
         const newData = data.filter(item=>{
           return item._id !== result._id
         })
@@ -114,11 +112,15 @@ function Home(){
         {data.map((item)=>{
             return(
               <div className="card home-card" key={item._id}>
-              <h5 style={{padding:"6px"}}><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id : "/profile" }>{item.postedBy.name}</Link> {item.postedBy._id == state._id && <i class="material-icons" style={{float:"right", margin:"3px 5px"}} onClick={()=>deletePost(item._id)}>delete</i>}</h5>
+
+              <div role="button" tabindex="0" style={{alignSelf:"center",display: "block" }}>
+              <img style={{position: "absolute", top: "6px", left: "6px", width: "35px", height: "35px", borderRadius: "50%"}} alt="" class="_6q-tv" src={item.postedBy.profilePic} />
+              </div>
+              <p style={{fontWeight:"500",paddingTop:"7px",paddingLeft:"8px"}}><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id : "/profile" } style={{marginLeft:"40px",fontSize:"20px"}}>{item.postedBy.name}</Link> {item.postedBy._id == state._id && <i class="material-icons" style={{float:"right", margin:"3px 5px"}} onClick={()=>deletePost(item._id)}>delete</i>}</p>
               <div className="card-image">
                 <img src={item.photo} alt="" />
               </div>
-              <div className="card-content">
+              <div className="card-content" style={{padding:"16px"}}>
                 {item.likes.includes(state._id)?
                   <i className="material-icons"
                   onClick={()=>{dislikepost(item._id)}}
@@ -128,13 +130,13 @@ function Home(){
                   onClick={()=>{likepost(item._id)}}
                   >favorite_border</i>
                 }
-                <h6>Liked by {item.likes.length}</h6>
-                <h6>{item.title}</h6>
-                <p>{item.body}</p>
+                <p>Liked by {item.likes.length}</p>
+                <p><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id : "/profile" }><b style={{fontWeight:"500"}}>{item.postedBy.name}</b></Link> {item.body}</p>
+                <div style={{paddingTop:"20px"}}>
                 {
                   item.comments.map(eachComment=>{
                     return(
-                      <h6 key={eachComment._id}><span>{eachComment.postedBy.name}</span> {eachComment.text}</h6>
+                      <p key={eachComment._id}><span style={{fontWeight:"500"}}>{eachComment.postedBy.name}</span> {eachComment.text}</p>
                     )
                   })
                 }
@@ -142,8 +144,9 @@ function Home(){
                   eve.preventDefault()
                   makeComment(eve.target[0].value,item._id)
                 }}>
-                  <input type="text" placeholder="Add Comment"/>
+                  <input className="input-box" style={{marginTop:"10px", padding:"-15px"}} type="text" placeholder="Add Comment"/>
                 </form>
+                </div>
               </div>
             </div>
           )

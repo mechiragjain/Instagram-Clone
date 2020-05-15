@@ -53,7 +53,6 @@ function CreatePost(){
 
   return(
     <div className="card input-field auth-card input-field" style={{marginTop:"50px"}}>
-      <input className="input-box" type="text" placeholder="title" value={title} onChange={(e)=>setTitle(e.target.value)} />
       <textarea className="input-box text-area" type="text" cols="5" rows="5" placeholder="Add Caption" value={body} onChange={(e)=>setBody(e.target.value)} />
 
       <div class="file-field input-field">

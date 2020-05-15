@@ -83,15 +83,15 @@ function Profile(){
     <>
     {userProfile ?
       <div style={{maxWidth:"900px", margin:"0px auto"}}>
-        <div style={{display:"flex", justifyContent:"space-around", margin:"18px 0px", borderBottom:"1px solid grey"}}>
-          <div>
+        <div style={{display:"flex", justifyContent:"space-around", margin:"18px 0px", borderBottom:"1px solid rgba(var(--b38,219,219,219))"}}>
+          <div style={{marginTop:"30px", marginBottom:"30px"}}>
             <img style={{width:"160px",height:"160px",borderRadius:"180px"}}
             src={userProfile.user.profilePic}
             alt="profile"
             />
           </div>
-          <div>
-            <h4>{userProfile.user.name}</h4>
+          <div style={{marginLeft:"-100px",marginTop:"30px"}}>
+            <h5>{userProfile.user.name}</h5>
             {showfollow ?
               <button style={{margin:"10px"}}className="btn waves-effect waves-light #64b5f6 blue darken-1"
               onClick={()=>followUser()}
@@ -107,9 +107,9 @@ function Profile(){
           }
 
             <div style={{display:"flex", justifyContent:"space-between", width:"108%"}}>
-                <h6>{userProfile.posts.length} Posts</h6>
-                <h6>{userProfile.user.followers.length} Followers</h6>
-                <h6>{userProfile.user.following.length} Following</h6>
+                <h6><b>{userProfile.posts.length}</b> Posts</h6>
+                <h6><b>{userProfile.user.followers.length}</b> Followers</h6>
+                <h6><b>{userProfile.user.following.length}</b> Following</h6>
             </div>
           </div>
         </div>
@@ -123,6 +123,10 @@ function Profile(){
             )
           })
         }
+        </div>
+
+        <div style={{margin:"50px", color:"grey", textAlign:"center"}}>
+          <p> © 2020 INSTAGRAM FROM FACEBOOK </p>
         </div>
 
       </div>

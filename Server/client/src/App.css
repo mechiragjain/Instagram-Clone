@@ -69,13 +69,13 @@ a{
 }
 
 .home{
-
 }
 
 .home-card{
   max-width: 600px;
   height: max-content;
-  margin: 20px auto;
+  margin: 60px auto;
+  border-radius: 2px;
 }
 
 .text-area{
@@ -84,4 +84,9 @@ a{
 
 .material-icons{
   cursor: pointer;
+}
+
+.homeComment{
+  border-top: 1px solid rgba(var(--ce3,239,239,239),1);
+  color: rgba(var(--f52,142,142,142),1);
 }

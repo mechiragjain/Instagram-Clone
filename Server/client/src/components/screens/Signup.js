@@ -99,7 +99,7 @@ function Signup(){
     </div>
     <div className="mycard">
       <div className="card auth-card input-field">
-        <h6> Have an account? <Link to="/login">Log in</Link></h6>
+        <h6> Have an account? <Link to="/login"><b>Log in</b></Link></h6>
       </div>
     </div>
     </div>
