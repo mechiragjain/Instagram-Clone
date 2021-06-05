@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const {MONGOURI} = require("./keys");
+const {MONGOURI} = require("./config/keys");
+
+const PORT = process.env.PORT || 4000
 
 mongoose.connect(MONGOURI,{
     useNewUrlParser: true,
@@ -23,8 +25,14 @@ app.use(require('./routes/login'));
 app.use(require('./routes/post'));
 app.use(require('./routes/user'));
 
-//GA41zuHRi6iX97kI
+if(process.env.NODE_ENV=="production"){
+    app.use(express.static('client/build'))
+    const path = require('path')
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
-app.listen(4000,function(){
+app.listen(PORT, function(){
   console.log("Server is running on Port 4000");
 })

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model("User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {TOKEN} = require('../keys');
+const {TOKEN} = require('../config/keys');
 const requiredLogin = require('../middleware/requireLogin');
 
 
