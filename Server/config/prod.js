@@ -1,4 +1,4 @@
 module.exports={
-  MONGOURI:process.end.MONGOURI,
+  MONGOURI:process.env.MONGOURI,
   TOKEN: process.env.JWT_SEC
 }
