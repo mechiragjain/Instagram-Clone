@@ -7,6 +7,14 @@ const jwt = require('jsonwebtoken');
 const {TOKEN} = require('../config/keys');
 const requiredLogin = require('../middleware/requireLogin');
 
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+  auth:{
+    api_key: "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"
+  }
+}))
 
 //Signup Route
 
@@ -31,6 +39,12 @@ router.post('/signup',(req,res)=>{
         })
         user.save()
         .then((user)=>{
+          transporter.sendMail({
+            to: user.email,
+            from: "me.chiragjain@gmail.com",
+            subject: "Welcome to Instagram Clone by Chirag Jain!",
+            html:"<h1>Share your First Post with your Friends!</h1>"
+          })
           res.json({message:"Registered Successfully"});
         })
         .catch((err)=>{
