@@ -10,6 +10,9 @@ import Profile from './components/screens/Profile';
 import CreatePost from './components/screens/CreatePost';
 import UserProfile from './components/screens/UserProfile';
 import Feed from './components/screens/feed';
+import ResetPassword from './components/screens/ResetPassword';
+import ResetLink from './components/screens/ResetLink';
+
 
 import {reducer,initialState} from './reducers/userReducer';
 
@@ -23,7 +26,8 @@ const Routing = ()=>{
     if(user){
       dispatch({type:"USER",payload:user});
     } else{
-      history.push('/login');
+      if(!history.location.pathname.startsWith('/reset'))
+        history.push('/login');
     }
   },[])
   return (
@@ -48,6 +52,12 @@ const Routing = ()=>{
     </Route>
     <Route path='/feed'>
       <Feed />
+    </Route>
+    <Route exact path='/reset'>
+      <ResetPassword />
+    </Route>
+    <Route path='/reset/:token'>
+      <ResetLink />
     </Route>
     </Switch>
   )

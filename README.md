@@ -15,6 +15,7 @@ This Project has been created solely for the educational purpose to learn some c
 - MongoDB
 - JWT Based Authentication
 - Deployment on Heroku
+- Integrating Email Services - SendGrid
 
 ## 🔑 Key Features
 
@@ -22,11 +23,11 @@ This Project has been created solely for the educational purpose to learn some c
 - Follow or unfollow the users
 - Like, Comment or Post Images
 - Update Profile Image
+- Reset Password
 
 ### Upcoming Features to be added
 
 - Search Users
-- Reset Password
 - Responsive Website
 
 ## ⭐ How to get started on local system?

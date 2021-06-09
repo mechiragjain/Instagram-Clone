@@ -10,6 +10,8 @@ const requiredLogin = require('../middleware/requireLogin');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 
+const crypto = require('crypto');
+
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth:{
     api_key: "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"
@@ -84,6 +86,71 @@ router.post('/login',(req,res)=>{
     .catch(err=>{
       console.log(err);
     })
+  })
+})
+
+router.post('/reset-password', (req, res) => {
+  crypto.randomBytes(32,(err, buffer)=>{
+    if(err){
+      console.log(err);
+    }
+    const token = buffer.toString("hex");
+    User.findOne({email:req.body.email})
+    .then((user)=>{
+      if(!user){
+        return res.status(422).json({error:"Email Not Found"})
+      }
+      user.resetToken = token
+      user.expiryToken = Date.now() + 3600000
+      user.save().then((result)=>{
+        transporter.sendMail({
+          to:user.email,
+          from:"me.chiragjain@gmail.com",
+          subject:"Password Reset Request - Instagram Clone Project",
+          html:`
+            <p>Hi ${user.name}</p>
+            <p>You had requested a new password for this account on Instagram Clone Project</p>
+            <p>If you didn't make this request, then just ignore this mail</p>
+            <p><a href="http://localhost:3000/reset/${token}">Click Here to reset your password</a></p>
+            <p>Thanks for reading.</p>
+          `
+        })
+        res.json({message:"Reset Password link sent to your mail"})
+      })
+    })
+  })
+})
+
+router.post('/new-password', (req,res)=>{
+  const newPassword = req.body.password
+  const sentToken = req.body.token
+
+  User.findOne({resetToken: sentToken, expiryToken: {$gt:Date.now()}})
+  .then(user => {
+    if(!user){
+      return res.status(422).json({error:"Session Expired. Please Try Again!"})
+    }
+    bcrypt.hash(newPassword, 12)
+    .then(hashedPassword => {
+      user.password = hashedPassword
+      user.resetToken = undefined
+      user.expiryToken = undefined
+      user.save().then(savedUser => {
+        transporter.sendMail({
+          to:user.email,
+          from:"me.chiragjain@gmail.com",
+          subject:"Password Changed Successfully - Instagram Clone Project",
+          html:`
+            <p>Hi ${user.name}</p>
+            <p>Your password has been updated</p>
+            <p>Thanks for reading.</p>
+          `
+        })
+        res.json({message:"Password Updated Successfully"})
+      })
+    })
+  }) .catch(err=>{
+    console.log(err);
   })
 })
 
