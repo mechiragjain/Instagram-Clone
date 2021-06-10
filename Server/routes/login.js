@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {TOKEN} = require('../config/keys');
 const requiredLogin = require('../middleware/requireLogin');
+const {SENDGRIDKEY} = require("../config/keys");
 
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -14,7 +15,7 @@ const crypto = require('crypto');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth:{
-    api_key: "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"
+    api_key: SENDGRIDKEY
   }
 }))
 
@@ -111,7 +112,7 @@ router.post('/reset-password', (req, res) => {
             <p>Hi ${user.name}</p>
             <p>You had requested a new password for this account on Instagram Clone Project</p>
             <p>If you didn't make this request, then just ignore this mail</p>
-            <p><a href="http://localhost:3000/reset/${token}">Click Here to reset your password</a></p>
+            <p><a href="https://instagram-webapp.herokuapp.com/reset/${token}">Click Here to reset your password</a></p>
             <p>Thanks for reading.</p>
           `
         })
